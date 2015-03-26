@@ -15,9 +15,8 @@
     (parse (formatter "dd/MM/YY") (trim d))))
 
 (defn dob-as-timestamp [p]
-  (let [[n g d] p
-         dob-datetime (parse-dob p)] 
-    (.getMillis dob-datetime)))
+  (let [[n g d] p] 
+    (.getMillis (parse-dob p))))
 
 (defn person-is-called? [expected p]
   (let [[n g d] p
@@ -30,9 +29,8 @@
 
 (defn days-between [n1 n2 ab]
   (let [d1 (parse-dob (find-by-name n1 ab))
-        d2 (parse-dob (find-by-name n2 ab))
-        i (interval d1 d2)]
-    (in-days i)))
+        d2 (parse-dob (find-by-name n2 ab))]
+    (in-days (interval d1 d2))))
 
 (defn -main []
   (println "Males: " (filter male? address-book))
